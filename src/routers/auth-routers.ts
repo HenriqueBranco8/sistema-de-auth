@@ -1,6 +1,7 @@
 
 import { IncomingMessage, ServerResponse } from "http";
 import { HttpMethod } from "../utills/http-methods";
+import { ContentType } from "../utills/content-types";
 
 export const authCompile = async (request: IncomingMessage, response: ServerResponse) => {
      // Verifica se o método é POST
@@ -20,20 +21,20 @@ export const authCompile = async (request: IncomingMessage, response: ServerResp
             console.log('Dados recebidos:', parsedBody);
 
             // Envia resposta de sucesso
-            response.writeHead(200, { 'Content-Type': 'application/json' });
+            response.writeHead(200, { 'Content-Type': ContentType.jsonUTF8 });
             response.end(JSON.stringify({ 
             message: 'Dados recebidos com sucesso', 
             dadosRecebidos: parsedBody 
             }));
         } catch (error) {
-            response.writeHead(400, { 'Content-Type': 'application/json' });
+            response.writeHead(400, { 'Content-Type': ContentType.jsonUTF8 });
             response.end(JSON.stringify({ error: 'Formato JSON inválido' }));
         }
         });
 
     } else {
         // Resposta para métodos não permitidos
-        response.writeHead(405, { 'Content-Type': 'text/plain' });
+        response.writeHead(405, { 'Content-Type': ContentType.text });
         response.end('Método não permitido');
     }
 }
