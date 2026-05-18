@@ -1,5 +1,5 @@
 import * as http from 'http'
-import { usersController } from './controller/auth-controller-register'
+import { usersController } from './controller/auth-controller'
 import { HttpMethod } from './utills/http-methods'
 
 const server = http.createServer ( async (request: http.IncomingMessage, response: http.ServerResponse) => {

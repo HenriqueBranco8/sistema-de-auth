@@ -1,4 +1,5 @@
-export interface UserEmail{
-    find(arg0: (tur: any) => boolean): unknown;
-    "email": String
+export interface userModel{
+    find: any,
+    "email": String,
+    "passowrd": String
 }

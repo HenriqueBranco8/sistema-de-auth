@@ -1,11 +1,14 @@
 [
     {
-        "email": "henriquebrancodasilvadias@gmail.com"
+        "email": "henriquebrancodasilvadias@gmail.com",
+        "passowrd": "Teste123"
     },
     {
-        "email": "HBDSD@gmail.com"
+        "email": "HBDSD@gmail.com",
+        "passowrd": "Teste8547@!#$"
     },
     {
-        "email": "GHB@gmail.com"
+        "email": "GHB@gmail.com",
+        "passowrd": "laikhikegf@"
     }
 ]
