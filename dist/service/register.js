@@ -30,7 +30,7 @@ var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: tru
 // src/service/register.ts
 var register_exports = {};
 __export(register_exports, {
-  register: () => register
+  registerUser: () => registerUser
 });
 module.exports = __toCommonJS(register_exports);
 var import_fs = __toESM(require("fs"));
@@ -40,18 +40,16 @@ var import_path = __toESM(require("path"));
 var pathData = import_path.default.join(__dirname, "../repositories/emails.json");
 
 // src/service/register.ts
-var readFile = async () => {
+var registerUser = async (email, password) => {
   const rawData = import_fs.default.readFileSync(pathData, "utf-8" /* UTF8 */);
-  const jsonFile = JSON.parse(rawData);
-  return jsonFile;
-};
-var register = async (email, passowrd) => {
-  await readFile();
-  const rawUser = { "email": email, passowrd };
-  const user = JSON.stringify(rawUser);
-  const addUser = import_fs.default.writeFileSync(pathData, user, "utf-8" /* UTF8 */);
+  const dataArray = JSON.parse(rawData);
+  const user = { "email": email, "password": password };
+  dataArray.push(user);
+  const dataString = JSON.stringify(dataArray);
+  const addUser = import_fs.default.writeFileSync(pathData, dataString, "utf-8" /* UTF8 */);
+  console.log("E-mail cadastrado");
 };
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
-  register
+  registerUser
 });

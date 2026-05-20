@@ -17,7 +17,7 @@
   "scripts": {
     "dist": "tsup src --out-dir dist",
     "start:Dev": "tsx --env-file=.env src/server.ts",
-    "start:watch": "tsx --watch --env-file=.env src/server.ts ",
+    "start:watch": "tsx --watch --env-file=.env src/server.ts",
     "start:Dist": "npm run dist && node --env-file=.env ./dist/server.js"
   },
   "repository": {

@@ -47,17 +47,38 @@ var verifEmail = async (userEmail) => {
   }
 };
 
+// src/service/register.ts
+var import_fs2 = __toESM(require("fs"));
+var registerUser = async (email, password) => {
+  const rawData = import_fs2.default.readFileSync(pathData, "utf-8" /* UTF8 */);
+  const dataArray = JSON.parse(rawData);
+  const user = { "email": email, "password": password };
+  dataArray.push(user);
+  const dataString = JSON.stringify(dataArray);
+  const addUser = import_fs2.default.writeFileSync(pathData, dataString, "utf-8" /* UTF8 */);
+  console.log("E-mail cadastrado");
+};
+
 // src/controller/auth-controller.ts
 var usersController = async (request, response) => {
-  const content = await verifEmail("GHB@gmail.com");
+  const content = await verifEmail("henriquebrancodasilvadias@gmail.com");
+  response.writeHead(200, { "content-type": "application/json; charset=utf-8" /* jsonUTF8 */ });
+  response.end(JSON.stringify(content));
+};
+var UserRegister = async (request, response) => {
+  const content = await registerUser("sdtrliogjjerilore@gmail.com", "sdada@!@#454507*-+");
   response.writeHead(200, { "content-type": "application/json; charset=utf-8" /* jsonUTF8 */ });
   response.end(JSON.stringify(content));
 };
 
 // src/server.ts
 var server = http.createServer(async (request, response) => {
-  if (request.method === "POST" /* POST */) {
+  const [baseUrl, queryString] = request.url?.split("?") ?? ["", ""];
+  if (request.method === "POST" /* POST */ && request.url === "/api/login") {
     await usersController(request, response);
+  }
+  if (request.method === "GET" /* GET */ && request.url === "/api/register") {
+    await UserRegister(request, response);
   }
 });
 var port = process.env.PORT;

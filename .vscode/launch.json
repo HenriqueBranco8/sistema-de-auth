@@ -7,10 +7,15 @@
             "request": "launch",
             "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/tsx",
             "program": "${workspaceFolder}/src/server.ts",
-            "skipFiles": ["<node_internals>/**"],
+            "skipFiles": ["<node_internals>/**", "${workspaceFolder}/node_modules/**"],
+            "outFiles": ["${workspaceFolder}/dist/**/*.js"],
             "envFile": "${workspaceFolder}/.env",
             "cwd": "${workspaceFolder}",
             "sourceMaps": true
         }
+    ],
+    "resolveSourceMapLocations": [
+        "${workspaceFolder}/**",
+        "!**/node_modules/**"
     ]
 }

@@ -1,15 +1,2 @@
 // src/repositories/emails.json
-var emails_default = [
-  {
-    email: "henriquebrancodasilvadias@gmail.com",
-    passowrd: "Teste123"
-  },
-  {
-    email: "HBDSD@gmail.com",
-    passowrd: "Teste8547@!#$"
-  },
-  {
-    email: "GHB@gmail.com",
-    passowrd: "laikhikegf@"
-  }
-];
+var emails_default = [{ email: "henriquebrancodasilvadias@gmail.com", passowrd: "Teste123" }, { email: "HBDSD@gmail.com", passowrd: "Teste8547@!#$" }, { email: "GHB@gmail.com", passowrd: "laikhikegf@" }, { email: "teste@gmail.com", password: "sdada@!@#454507*-+" }, { email: "sdtrliogjjerilore@gmail.com", password: "sdada@!@#454507*-+" }, { email: "sdtrliogjjerilore@gmail.com", password: "sdada@!@#454507*-+" }, { email: "sdtrliogjjerilore@gmail.com", password: "sdada@!@#454507*-+" }];

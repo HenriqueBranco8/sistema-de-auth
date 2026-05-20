@@ -30,7 +30,7 @@ var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: tru
 // src/controller/auth-controller.ts
 var auth_controller_exports = {};
 __export(auth_controller_exports, {
-  registerUser: () => registerUser,
+  UserRegister: () => UserRegister,
   usersController: () => usersController
 });
 module.exports = __toCommonJS(auth_controller_exports);
@@ -57,16 +57,31 @@ var verifEmail = async (userEmail) => {
   }
 };
 
+// src/service/register.ts
+var import_fs2 = __toESM(require("fs"));
+var registerUser = async (email, password) => {
+  const rawData = import_fs2.default.readFileSync(pathData, "utf-8" /* UTF8 */);
+  const dataArray = JSON.parse(rawData);
+  const user = { "email": email, "password": password };
+  dataArray.push(user);
+  const dataString = JSON.stringify(dataArray);
+  const addUser = import_fs2.default.writeFileSync(pathData, dataString, "utf-8" /* UTF8 */);
+  console.log("E-mail cadastrado");
+};
+
 // src/controller/auth-controller.ts
 var usersController = async (request, response) => {
-  const content = await verifEmail("GHB@gmail.com");
+  const content = await verifEmail("henriquebrancodasilvadias@gmail.com");
   response.writeHead(200, { "content-type": "application/json; charset=utf-8" /* jsonUTF8 */ });
   response.end(JSON.stringify(content));
 };
-var registerUser = async (request, response) => {
+var UserRegister = async (request, response) => {
+  const content = await registerUser("sdtrliogjjerilore@gmail.com", "sdada@!@#454507*-+");
+  response.writeHead(200, { "content-type": "application/json; charset=utf-8" /* jsonUTF8 */ });
+  response.end(JSON.stringify(content));
 };
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
-  registerUser,
+  UserRegister,
   usersController
 });
