@@ -4,6 +4,7 @@ import { ContentType } from '../utills/content-types'
 import { verifEmail } from '../service/verif-user'
 import { registerUser } from '../service/register'
 import { viewEmails } from '../service/painel-adm'
+import { StatusCode } from '../utills/status-code'
 
 
 export const usersController = async (request: IncomingMessage, response: ServerResponse) => {
@@ -12,22 +13,21 @@ export const usersController = async (request: IncomingMessage, response: Server
     //O content irá receber uma função que busca o e-mail adicionado no Db. Porém, como esse projeto está em estado de desenvolvimento, busca em um json (emails.json)
     const content = await verifEmail('henriquebrancodasilvadias@gmail.com')
 
-    response.writeHead(200, {'content-type' : ContentType.jsonUTF8})
+    response.writeHead(StatusCode.OK, {'content-type' : ContentType.jsonUTF8})
     response.end(JSON.stringify(content))
 }
 
 export const UserRegister = async (request: IncomingMessage, response:ServerResponse) => {
-    const content = await registerUser('4532','sdada@!@#454507*-+')
+    const content = await registerUser('sdtrliogjjerilore@gmail.com','sdada@!@#454507*-+')
 
-    response.writeHead(200, {'content-type' : ContentType.jsonUTF8})
+    response.writeHead(StatusCode.OK, {'content-type' : ContentType.jsonUTF8})
     response.end(JSON.stringify(content))
 } 
 
 export const painelADM = async(request: IncomingMessage, response: ServerResponse) => {
 
-    
     const content = await viewEmails(request.url)
-    
-    response.writeHead(200, {'content-type' : ContentType.jsonUTF8})
+
+    response.writeHead(StatusCode.OK, {'content-type' : ContentType.jsonUTF8})
     response.end(JSON.stringify(content))
 }

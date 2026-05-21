@@ -6,21 +6,20 @@ const server = http.createServer ( async (request: http.IncomingMessage, respons
 
 
     //localhost:3636/api/login
-
     const [baseUrl, queryString] = request.url?.split('?') ?? ['','']
     console.log(queryString)
 
     
-    if(request.method === HttpMethod.POST && baseUrl === '/api/login'){
+    if(request.method === HttpMethod.POST && baseUrl === Routers.LOGIN){
         await usersController(request, response)
         
     } 
 
-    if(request.method === HttpMethod.GET && baseUrl === '/api/register'){
+    if(request.method === HttpMethod.GET && baseUrl === Routers.REGISTER){
         await UserRegister(request, response)
     }
 
-    if(request.method === HttpMethod.POST && baseUrl === '/api/painel'){
+    if(request.method === HttpMethod.POST && baseUrl === Routers.PAINEL){
         await painelADM(request, response)
     }
 
