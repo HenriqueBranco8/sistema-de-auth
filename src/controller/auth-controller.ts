@@ -17,7 +17,7 @@ export const usersController = async (request: IncomingMessage, response: Server
 }
 
 export const UserRegister = async (request: IncomingMessage, response:ServerResponse) => {
-    const content = await registerUser('sdtrliogjjerilore@gmail.com','sdada@!@#454507*-+')
+    const content = await registerUser('4532','sdada@!@#454507*-+')
 
     response.writeHead(200, {'content-type' : ContentType.jsonUTF8})
     response.end(JSON.stringify(content))
@@ -25,10 +25,9 @@ export const UserRegister = async (request: IncomingMessage, response:ServerResp
 
 export const painelADM = async(request: IncomingMessage, response: ServerResponse) => {
 
-    //localhost:3636/api/login?p=admin
-    const queryString = request.url?.split('?p=')[1] ?? ''
-    const content = await viewEmails(queryString)
-
+    
+    const content = await viewEmails(request.url)
+    
     response.writeHead(200, {'content-type' : ContentType.jsonUTF8})
     response.end(JSON.stringify(content))
 }

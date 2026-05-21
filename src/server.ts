@@ -5,7 +5,8 @@ import { HttpMethod } from './utills/http-methods'
 const server = http.createServer ( async (request: http.IncomingMessage, response: http.ServerResponse) => {
 
 
-    //localhost:3636/api/login?p=admin
+    //localhost:3636/api/login
+
     const [baseUrl, queryString] = request.url?.split('?') ?? ['','']
     console.log(queryString)
 
