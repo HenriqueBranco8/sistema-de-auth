@@ -1,6 +1,7 @@
 import * as http from 'http'
 import { painelADM, UserRegister, usersController } from './controller/auth-controller'
 import { HttpMethod } from './utills/http-methods'
+import { Routers } from './routers/routers'
 
 const server = http.createServer ( async (request: http.IncomingMessage, response: http.ServerResponse) => {
 
