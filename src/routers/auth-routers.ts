@@ -1,7 +1,9 @@
-
+import * as z from 'zod'
 import { IncomingMessage, ServerResponse } from "http";
 import { HttpMethod } from "../utills/http-methods";
 import { ContentType } from "../utills/content-types";
+import { parse } from 'path';
+
 
 export const authCompile = async (request: IncomingMessage, response: ServerResponse) => {
      // Verifica se o método é POST
@@ -10,7 +12,7 @@ export const authCompile = async (request: IncomingMessage, response: ServerResp
 
         // Escuta os chunks de dados que chegam no corpo da requisição
         request.on('data', chunk => {
-        rawbBody += chunk.toString(); // Converte buffer para string e concatena
+            rawbBody += chunk.toString(); // Converte buffer para string e concatena
         });
 
         // Quando a leitura do corpo termina
@@ -19,13 +21,20 @@ export const authCompile = async (request: IncomingMessage, response: ServerResp
             // Converte a string JSON para um objeto JavaScript
             const parsedBody = JSON.parse(rawbBody);
             console.log('Dados recebidos:', parsedBody);
+            
+            
+            const user = z.object({
+                
+                email: z.email().trim()
+            })
+
+            const parsedUser = user.parse({email: parsedBody.email})
+
 
             // Envia resposta de sucesso
             response.writeHead(200, { 'Content-Type': ContentType.jsonUTF8 });
-            response.end(JSON.stringify({ 
-            message: 'Dados recebidos com sucesso', 
-            dadosRecebidos: parsedBody 
-            }));
+            response.end(JSON.stringify(parsedUser));
+
         } catch (error) {
             response.writeHead(400, { 'Content-Type': ContentType.jsonUTF8 });
             response.end(JSON.stringify({ error: 'Formato JSON inválido' }));

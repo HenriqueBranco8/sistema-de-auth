@@ -12,14 +12,13 @@ export const usersController = async (request: IncomingMessage, response: Server
 
 
     //O content irá receber uma função que busca o e-mail adicionado no Db. Porém, como esse projeto está em estado de desenvolvimento, busca em um json (emails.json)
-    const content = await verifEmail('henriquebrancodasilvadias@gmail.com')
-
-    response.writeHead(StatusCode.OK, {'content-type' : ContentType.jsonUTF8})
-    response.end(JSON.stringify(content))
+    //const content = await verifEmail('henriquebrancodasilvadias@gmail.com')
+    await authCompile(request, response)
+    
 }
 
 export const UserRegister = async (request: IncomingMessage, response:ServerResponse) => {
-    const content = await registerUser('11','sdada@!@#454507*-+')
+    const content = await registerUser('henriquebrancodasilvadias@gmail.com','sdada@!@#454507*-+')
     response.writeHead(StatusCode.OK, {'content-type' : ContentType.jsonUTF8})
     response.end(JSON.stringify(content))
 } 
