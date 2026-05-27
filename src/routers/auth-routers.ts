@@ -2,48 +2,20 @@ import * as z from 'zod'
 import { IncomingMessage, ServerResponse } from "http";
 import { HttpMethod } from "../utills/http-methods";
 import { ContentType } from "../utills/content-types";
-import { parse } from 'path';
+import { convertChunk } from './body';
 
 
 export const authCompile = async (request: IncomingMessage, response: ServerResponse) => {
      // Verifica se o método é POST
     if (request.method === HttpMethod.POST) {
-        let rawbBody = '';
-
-        // Escuta os chunks de dados que chegam no corpo da requisição
-        request.on('data', chunk => {
-            rawbBody += chunk.toString(); // Converte buffer para string e concatena
-        });
-
-        // Quando a leitura do corpo termina
-        request.on('end', () => {
-        try {
-            // Converte a string JSON para um objeto JavaScript
-            const parsedBody = JSON.parse(rawbBody);
-            console.log('Dados recebidos:', parsedBody);
-            
-            
-            const user = z.object({
-                
-                email: z.email().trim()
-            })
-
-            const parsedUser = user.parse({email: parsedBody.email})
-
-
-            // Envia resposta de sucesso
-            response.writeHead(200, { 'Content-Type': ContentType.jsonUTF8 });
-            response.end(JSON.stringify(parsedUser));
-
-        } catch (error) {
-            response.writeHead(400, { 'Content-Type': ContentType.jsonUTF8 });
-            response.end(JSON.stringify({ error: 'Formato JSON inválido' }));
-        }
-        });
-
+       const body:any = await convertChunk(request)
+       console.log(body.email)
     } else {
-        // Resposta para métodos não permitidos
-        response.writeHead(405, { 'Content-Type': ContentType.text });
-        response.end('Método não permitido');
+        if (request.method === HttpMethod.GET){
+            // Resposta para métodos não permitidos
+            response.writeHead(405, { 'Content-Type': ContentType.text });
+            response.end('Método não permitido');
+        }
+        
     }
 }
