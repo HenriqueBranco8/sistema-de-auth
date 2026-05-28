@@ -8,7 +8,7 @@ const server = http.createServer ( async (request: http.IncomingMessage, respons
 
     //localhost:3636/api/login
     const [baseUrl, queryString] = request.url?.split('?') ?? ['','']
-    console.log(queryString)
+    //console.log(queryString)
 
     
     if(request.method === HttpMethod.POST && baseUrl === Routers.LOGIN){

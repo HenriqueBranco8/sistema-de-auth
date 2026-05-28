@@ -1,7 +1,6 @@
 import {IncomingMessage, ServerResponse} from 'http'
 import { ContentType } from '../utills/content-types'
 
-import { verifEmail } from '../service/verif-user'
 import { registerUser } from '../service/register'
 import { viewEmails } from '../service/painel-adm'
 import { StatusCode } from '../utills/status-code'
