@@ -30,8 +30,8 @@ export const parseRequestBody = async (request: IncomingMessage) => {
                     
                     //Se não, retorna o dado convertido para usar em outro lugar
                     const parsedBody = JSON.parse(rawBody)
-                    console.log(parsedBody)
-                    resolve(parsedBody)
+                    resolve({email: parsedBody.email, password: parsedBody.password})
+                    
                 }
 
             //Caso as conversões derem errado, aparecerá um erro de catch

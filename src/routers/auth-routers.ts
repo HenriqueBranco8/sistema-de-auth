@@ -11,11 +11,14 @@ export const authCompile = async (request: IncomingMessage, response: ServerResp
     if (request.method === HttpMethod.POST) {
 
         //Guarda o que vem do client em um objeto
-        const body:object = await parseRequestBody(request)
-
+        const body:any = await parseRequestBody(request)
+        
         //valida se o que veio do client está no padrão correto
-        const validatorBody = await registerValidator(body)
+        
+        const validatorBody = registerValidator(body.email, body.password)
+
         return validatorBody
+        
 
     } else {
         
