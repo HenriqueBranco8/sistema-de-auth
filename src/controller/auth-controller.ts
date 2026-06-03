@@ -8,14 +8,21 @@ import { authCompile } from '../routers/auth-routers'
 import { verifEmail } from '../service/verif-user'
 
 
-export const usersController = async (request: IncomingMessage, response: ServerResponse) => {
+export const usersController = async (teste: string, response: ServerResponse) => {
     //O content irá receber uma função que busca o e-mail adicionado no Db. Porém, como esse projeto está em estado de desenvolvimento, busca em um json (emails.json)
     
-    const t:any = await authCompile(request, response)
-    const content = await verifEmail(t.email, t.password)
-    const msg = 'Email encontrado com sucesso! Carregando página inicial...'
-    response.writeHead(StatusCode.OK, {'content-type' : ContentType.jsonUTF8})
-    response.end(JSON.stringify(msg))
+    let msg = ''
+    const content = await verifEmail(teste)
+    if(content){
+        msg = 'Email encontrado com sucesso! Carregando página inicial...'
+        response.writeHead(StatusCode.OK, {'content-type' : ContentType.jsonUTF8})
+        response.end(JSON.stringify(msg))
+    } else {
+        msg = 'Email não encontrado... (msg dentro de userController)'
+        response.writeHead(StatusCode.CLIENT, {'content-type' : ContentType.jsonUTF8})
+        response.end(JSON.stringify(msg))
+    }
+    
 }
 
 export const UserRegister = async (request: IncomingMessage, response:ServerResponse) => {

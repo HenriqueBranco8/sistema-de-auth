@@ -2,6 +2,7 @@ import * as http from 'http'
 import { painelADM, UserRegister, usersController } from './controller/auth-controller'
 import { HttpMethod } from './utills/http-methods'
 import { Routers } from './routers/routers'
+import { authCompile } from './routers/auth-routers'
 
 const server = http.createServer ( async (request: http.IncomingMessage, response: http.ServerResponse) => {
 
@@ -12,7 +13,7 @@ const server = http.createServer ( async (request: http.IncomingMessage, respons
 
     
     if(request.method === HttpMethod.POST && baseUrl === Routers.LOGIN){
-        await usersController(request, response)
+        await authCompile(request, response)
         
     } 
 

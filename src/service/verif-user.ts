@@ -2,7 +2,7 @@ import { userModel } from "../models/interface"
 import { emailUser } from "./emails"
 
 //Função que vai verificar o email do usuário. Recebe como parâmetro e-mail do usuário
-export const verifEmail = async (userEmail: string | undefined, teste: string | undefined)  => {
+export const verifEmail = async (userEmail: string | undefined)  => {
 
     //Essa função email recebe o emailUser que busca os dados que estão no json (emails.json)
     const email = await emailUser()
@@ -17,7 +17,7 @@ export const verifEmail = async (userEmail: string | undefined, teste: string | 
         //Se o email fosse encontado, o usuário iria para página inicial (ainda vou implementar essa função)
         return {email: emailFound}
     } else {
-        console.log('E-mail, não encontado.')
+        console.log('E-mail, não encontado. (msg dentro de verifEmail)')
     }
 }
 

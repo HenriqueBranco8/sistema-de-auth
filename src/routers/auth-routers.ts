@@ -4,6 +4,7 @@ import { HttpMethod } from "../utills/http-methods";
 import { ContentType } from "../utills/content-types";
 import {parseRequestBody } from '../utills/body-parser';
 import { registerValidator } from '../validators/auth-register-validator';
+import { usersController } from "../controller/auth-controller";
 
 
 export const authCompile = async (request: IncomingMessage, response: ServerResponse) => {
@@ -15,9 +16,9 @@ export const authCompile = async (request: IncomingMessage, response: ServerResp
         
         //valida se o que veio do client está no padrão correto
         
-        const validatorBody = registerValidator(body.email, body.password)
+        const validatorBody:any = registerValidator(body.email, body.password)
 
-        return validatorBody
+        await usersController(validatorBody.email, response)
         
 
     } else {
