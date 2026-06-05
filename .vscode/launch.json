@@ -2,20 +2,15 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Debug Server",
-            "type": "node",
-            "request": "launch",
-            "runtimeExecutable": "node",
-            "runtimeArgs": ["--require", "ts-node/register"],
-            "program": "${workspaceFolder}/src/server.ts",
-            "skipFiles": ["<node_internals>/**", "**/node_modules/**"],
-            "resolveSourceMapLocations": [
-                "${workspaceFolder}/**",
-                "!**/node_modules/**"
+            "name": "Attach by Process ID",
+            "processId": "${command:PickProcess}",
+            "request": "attach",
+            "skipFiles": [
+                "<node_internals>/**"
             ],
-            "envFile": "${workspaceFolder}/.env",
-            "cwd": "${workspaceFolder}",
-            "sourceMaps": true
+            "type": "node"
         }
+        
     ]
+
 }

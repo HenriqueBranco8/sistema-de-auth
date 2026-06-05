@@ -6,19 +6,18 @@ import {parseRequestBody } from '../utills/body-parser';
 import { registerValidator } from '../validators/auth-register-validator';
 import { usersController } from "../controller/auth-controller";
 
+import { userModel } from "../models/interface";
+
 
 export const authCompile = async (request: IncomingMessage, response: ServerResponse) => {
     // Verifica se o método é POST
     if (request.method === HttpMethod.POST) {
 
         //Guarda o que vem do client em um objeto
-        const body:any = await parseRequestBody(request)
-        
-        //valida se o que veio do client está no padrão correto
-        
-        const validatorBody:any = registerValidator(body.email, body.password)
+        const body:userModel = await parseRequestBody(request)
 
-        await usersController(validatorBody.email, response)
+        //manda para o controller o que veio do client
+        await usersController(body, response)
         
 
     } else {

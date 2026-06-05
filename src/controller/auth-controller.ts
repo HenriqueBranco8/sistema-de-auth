@@ -6,13 +6,19 @@ import { viewEmails } from '../service/painel-adm'
 import { StatusCode } from '../utills/status-code'
 import { authCompile } from '../routers/auth-routers'
 import { verifEmail } from '../service/verif-user'
+import { registerValidator } from '../validators/auth-register-validator'
+import { userModel } from '../models/interface'
 
 
-export const usersController = async (teste: string, response: ServerResponse) => {
+export const usersController = async (inputUser:userModel, response: ServerResponse) => {
     //O content irá receber uma função que busca o e-mail adicionado no Db. Porém, como esse projeto está em estado de desenvolvimento, busca em um json (emails.json)
     
     let msg = ''
-    const content = await verifEmail(teste)
+    const t:userModel = registerValidator(inputUser)
+
+
+    const content = await verifEmail(t.email)
+    
     if(content){
         msg = 'Email encontrado com sucesso! Carregando página inicial...'
         response.writeHead(StatusCode.OK, {'content-type' : ContentType.jsonUTF8})
@@ -22,7 +28,7 @@ export const usersController = async (teste: string, response: ServerResponse) =
         response.writeHead(StatusCode.CLIENT, {'content-type' : ContentType.jsonUTF8})
         response.end(JSON.stringify(msg))
     }
-    
+
 }
 
 export const UserRegister = async (request: IncomingMessage, response:ServerResponse) => {

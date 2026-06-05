@@ -1,12 +1,14 @@
 
 import { IncomingMessage} from "http"
+import { userModel } from "../models/interface"
+
 
 
 
 export const parseRequestBody = async (request: IncomingMessage) => {
 
     // envolve request.on em Promise para usar async/await
-    return new Promise<object>((resolve, reject) => {
+    return new Promise<userModel>((resolve, reject) => {
 
         //variável guardará os dados vindo do client
         let rawBody = ''
@@ -30,7 +32,7 @@ export const parseRequestBody = async (request: IncomingMessage) => {
                     
                     //Se não, retorna o dado convertido para usar em outro lugar
                     const parsedBody = JSON.parse(rawBody)
-                    resolve({email: parsedBody.email, password: parsedBody.password})
+                    resolve(parsedBody)
                     
                 }
 

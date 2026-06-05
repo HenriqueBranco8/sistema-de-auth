@@ -1,7 +1,8 @@
 import * as z from 'zod'
+import { userModel } from '../models/interface'
 
 //Função que analisa se o formato de dados está correto.
-export const registerValidator = (inputEmail: string, inputPassword:string ) => {
+export const registerValidator = (inputUser: unknown) => {
 
     //Modelo padrão que tem que vir do client
     const register = z.strictObject({
@@ -10,6 +11,6 @@ export const registerValidator = (inputEmail: string, inputPassword:string ) => 
     })
 
     //transforma o inputEmail em um objeto compativel com o Modelo padrão, caso o input tenha campos a mais ou fora do padrão irá dar erro
-    const data:object = register.parse({email: inputEmail, password: inputPassword})
+    const data:userModel = register.parse(inputUser)
     return data
 }

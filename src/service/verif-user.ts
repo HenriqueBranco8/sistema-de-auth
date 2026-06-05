@@ -2,7 +2,7 @@ import { userModel } from "../models/interface"
 import { emailUser } from "./emails"
 
 //Função que vai verificar o email do usuário. Recebe como parâmetro e-mail do usuário
-export const verifEmail = async (userEmail: string | undefined)  => {
+export const verifEmail = async (userEmail: String | undefined)  => {
 
     //Essa função email recebe o emailUser que busca os dados que estão no json (emails.json)
     const email = await emailUser()
