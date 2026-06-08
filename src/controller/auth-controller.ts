@@ -1,4 +1,4 @@
-import {IncomingMessage, ServerResponse} from 'http'
+import {IncomingMessage, request, ServerResponse} from 'http'
 import { ContentType } from '../utills/content-types'
 
 import { registerUser } from '../service/register'
@@ -6,30 +6,30 @@ import { viewEmails } from '../service/painel-adm'
 import { StatusCode } from '../utills/status-code'
 import { authCompile } from '../routers/auth-routers'
 import { verifEmail } from '../service/verif-user'
-import { registerValidator } from '../validators/auth-register-validator'
+import { validatorLogin } from '../validators/auth-register-validator'
 import { userModel } from '../models/interface'
+import { sendError, sendSucess } from '../utills/send-response'
 
 
 export const usersController = async (inputUser:userModel, response: ServerResponse) => {
-    //O content irá receber uma função que busca o e-mail adicionado no Db. Porém, como esse projeto está em estado de desenvolvimento, busca em um json (emails.json)
     
-    let msg = ''
-    const t:userModel = registerValidator(inputUser)
-
-
-    const content = await verifEmail(t.email)
     
-    if(content){
-        msg = 'Email encontrado com sucesso! Carregando página inicial...'
-        response.writeHead(StatusCode.OK, {'content-type' : ContentType.jsonUTF8})
-        response.end(JSON.stringify(msg))
+    //Guardar o objeto formatado no padrão correto sem campos extras e lógica de e-mail e senha
+    const validatedUser:userModel = validatorLogin(inputUser)
+
+    //Recebe o resultado da verificação, se o email existe ou não.
+    const foundEmail = await verifEmail(validatedUser.email)
+    
+    //Se o email for encontrado, aparecerá conforme o email seja encontrado ou não
+    if(foundEmail){
+        sendSucess(response)
+        
     } else {
-        msg = 'Email não encontrado... (msg dentro de userController)'
-        response.writeHead(StatusCode.CLIENT, {'content-type' : ContentType.jsonUTF8})
-        response.end(JSON.stringify(msg))
-    }
-
+        sendError(response)
+    } 
+         
 }
+
 
 export const UserRegister = async (request: IncomingMessage, response:ServerResponse) => {
     const content = await registerUser('henriquebrancodasilvadias@gmail.com','sdada@!@#454507*-+')

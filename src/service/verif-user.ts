@@ -16,8 +16,6 @@ export const verifEmail = async (userEmail: String | undefined)  => {
         //console.log('Email, encontado')
         //Se o email fosse encontado, o usuário iria para página inicial (ainda vou implementar essa função)
         return {email: emailFound}
-    } else {
-        console.log('E-mail, não encontado. (msg dentro de verifEmail)')
     }
 }
 

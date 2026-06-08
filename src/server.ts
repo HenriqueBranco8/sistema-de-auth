@@ -1,5 +1,5 @@
 import * as http from 'http'
-import { painelADM, UserRegister, usersController } from './controller/auth-controller'
+import { painelADM, UserRegister } from './controller/auth-controller'
 import { HttpMethod } from './utills/http-methods'
 import { Routers } from './routers/routers'
 import { authCompile } from './routers/auth-routers'
