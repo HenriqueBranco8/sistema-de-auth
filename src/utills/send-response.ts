@@ -3,9 +3,10 @@ import { StatusCode } from './status-code'
 import { ContentType } from './content-types'
 
 //Guarda os tipos de mensagem que serão enviadas
-let responseMessage = ''
+
 
 export const sendSucess = (response: ServerResponse) => {
+    let responseMessage = ''
     responseMessage  = 'Dado Válido! Carregando...'
 
 
@@ -15,6 +16,7 @@ export const sendSucess = (response: ServerResponse) => {
 
 
 export const sendError = (response: ServerResponse) => {
+    let responseMessage = ''
     responseMessage  = '[ERRO] Dados inválidos'
 
     response.writeHead(StatusCode.UNAUTHENTICATED, {'content-type' : ContentType.jsonUTF8})

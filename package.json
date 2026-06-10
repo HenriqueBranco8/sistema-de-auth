@@ -1,8 +1,5 @@
 {
   "dependencies": {
-    "@prisma/adapter-pg": "^7.8.0",
-    "@prisma/client": "^7.8.0",
-    "pg": "^8.20.0",
     "tsup": "^8.5.1",
     "tsx": "^4.21.0",
     "typescript": "^6.0.3"
@@ -33,9 +30,8 @@
   },
   "homepage": "https://github.com/HenriqueBranco8/sistema-de-auth#readme",
   "devDependencies": {
-    "@types/pg": "^8.20.0",
+    "@types/k6": "^2.0.0",
     "dotenv": "^17.4.2",
-    "prisma": "^7.8.0",
     "ts-node": "^10.9.2",
     "zod": "^4.4.3"
   }
