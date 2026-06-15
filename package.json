@@ -33,6 +33,7 @@
   },
   "homepage": "https://github.com/HenriqueBranco8/sistema-de-auth#readme",
   "devDependencies": {
+    "@types/node": "^25.9.3",
     "@types/pg": "^8.20.0",
     "dotenv": "^17.4.2",
     "prisma": "^7.8.0",
